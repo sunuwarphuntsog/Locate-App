@@ -1,0 +1,31 @@
+﻿    <ion-view view-title="Login" hide-nav-bar="true">
+        <ion-content class="padding loginimage">
+            <div><p style="position:relative; font-weight:bold; font-size:70px; color:indianred; font-family:'Microsoft Himalaya'; top:130px;">Leaf<br>
+                                                                                                                                                  Leaf</p></div>
+            <div style="position:relative;">
+                <div style="position:relative; width:100%; top:340px">
+                    <div class="no-padding">
+                        <button class="button button-block button-stable" style="color:red" ng-click="openSigninModal()">Sign in with Google</button>
+                    </div>
+                    <div class="row no-padding">
+                        <div id="btn-facebook" class="col">
+                            <button class="button button-positive button-block" ng-click="openSigninModal()">Facebook</button>
+                        </div>
+                        <div id="btn-twitter" class="col">
+                            <button class="button button-calm button-block" ng-click="openSigninModal()">Twitter</button>
+                        </div>
+                    </div>
+                    <div class="no-padding">
+                        <a class="button button-clear" style="float: right; color:white" ng-click="goToRegistration()">Create Account</a>
+                        <!--<a class="button button-clear" style="float: right; color:white" href="#/app/registration">Create Account</a>-->
+                        <button class="button button-clear" style="float: left;" ng-click="openSigninModal()">Sign in with email</button>
+                        <!--<a class="button button-clear" style="float: left; color:white" href="#/app/registration">Sign in with email</a>-->
+                    </div>
+
+                </div>
+            </div>
+        </ion-content>
+    </ion-view>
+
+
+    

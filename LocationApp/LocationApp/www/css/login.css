@@ -1,0 +1,21 @@
+﻿
+@import url('login.css');
+
+
+#btn-facebook {
+    padding: 0 10px 0 0; 
+}
+
+#btn-twitter {
+    padding: 0 0 0 7px; 
+}
+
+
+/*linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) )*/
+
+.loginimage.scroll-content {
+    /*background: url(http://housetohome.media.ipcdigital.co.uk/96/00000cffe/327c_orh550w550/wallpaper-jlewis.jpg);*/     /*url(http://i.imgur.com/q0B6Vtw.jpg); */ 
+    background: url(https://img0.etsystatic.com/017/0/6637732/il_340x270.474393456_msj1.jpg);
+    background-size:cover;
+    position:absolute;
+}

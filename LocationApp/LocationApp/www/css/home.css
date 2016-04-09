@@ -1,0 +1,34 @@
+﻿.homeBackground.scroll-content {
+    /*background: linear-gradient(to bottom right, #252525, #303030) !important;*/  
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://s-media-cache-ak0.pinimg.com/236x/58/2a/f4/582af4de65676cd828d4d2022ededd89.jpg);
+    background-size:contain;
+    position:absolute;
+}
+
+
+/*Set the background to transparent for ion-item*/
+.homeBackground .item {
+  background-color: transparent;
+  border-color:black;
+  border:none;   /*Removes all borders*/
+  border-bottom:1px solid black;   /*Bottom border for each menu item*/
+  color: indianred;    /*Text color for each item*/
+  font-size:30px;
+}
+
+/*Changes the border for the last item*/
+.homeBackground .item:last-child {
+  border-bottom: 1px solid black;
+}
+ 
+.homeBackground .item-complex .item-content, .dark .item-radio .item-content {
+  background-color: transparent;
+}
+ 
+/*Just makes the type white*/
+.homeBackground h2,
+.homeBackground h3,
+.homeBackground p,
+.homeBackground a {
+  color: white;   /*Text color for each item, overrides the color property above*/
+}
