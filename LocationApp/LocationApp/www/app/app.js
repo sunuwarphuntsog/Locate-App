@@ -1,9 +1,11 @@
 ﻿//(function () {
 //    "use strict";
 
-var app = angular.module("myapp", ["ionic", "myapp.controllers", "myapp.services", "ngMockE2E"]);
+//var app = angular.module("myapp", ["ionic", "myapp.controllers", "myapp.services", "ngMockE2E"]);
 
-        app.run(function ($ionicPlatform) {
+var app = angular.module("myapp", ["ionic", "ngMockE2E"]);
+
+app.run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
                 if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -13,7 +15,7 @@ var app = angular.module("myapp", ["ionic", "myapp.controllers", "myapp.services
                 }
             });
         })
-        .config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
             $stateProvider
             .state("app", {
                 url: "/app",
@@ -39,17 +41,18 @@ var app = angular.module("myapp", ["ionic", "myapp.controllers", "myapp.services
             });
             $urlRouterProvider.otherwise("/app/login");
         })
-        .constant("AUTH_EVENTS", {
+.constant("AUTH_EVENTS", {
             notAuthenticated: "auth-not-authenticated",
             notAuthorized: "auth-not-authorized"
         })
-        .constant("USER_ROLES", {
+.constant("USER_ROLES", {
             admin: "admin_role",
             basic: "basic_role"
         });
 
 
-        app.run(function ($rootScope, $state, authService, AUTH_EVENTS) {
+//authorization 
+ app.run(function ($rootScope, $state, authService, AUTH_EVENTS) {
             $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
 
                 if ('data' in next && 'authorizedRoles' in next.data) {
@@ -63,26 +66,35 @@ var app = angular.module("myapp", ["ionic", "myapp.controllers", "myapp.services
 
 
                 if (!authService.isAuthenticated()) {
-                    if (next.name !== 'app.login') {
-                        event.preventDefault();
-                        $state.go('app.login', {}, {reload: true});
-                    }
+
+                    if (next.name !== "app.registration") {
+                        if (next.name !== 'app.login') {
+                            event.preventDefault();
+                            $state.go('app.login', {}, { reload: true });
+                        };
+                    };
+                    
                 }
 
             });
         });
+//authorization 
 
 
-        app.run(function ($httpBackend) {
+//backend Mock 
+app.run(function ($httpBackend) {
             $httpBackend.whenGET("http://localhost:8010/dummyCall")
                                 .respond({ message: "Not Authenticated" });
 
             $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
             $httpBackend.whenGET(/modalTemplates\/\w+.*/).passThrough();
         });
+//backend Mock 
 
-        //interceptor
-        app.factory("authInterceptor", ["$rootScope", "$q", "AUTH_EVENTS", function ($rootScope, $q, AUTH_EVENTS) {
+
+//Authentication Interceptor.........
+app.factory("authInterceptor", ["$rootScope", "$q", "AUTH_EVENTS", function ($rootScope, $q, AUTH_EVENTS) {
+
             return {
 
                 responseError: function (response) {
@@ -94,15 +106,12 @@ var app = angular.module("myapp", ["ionic", "myapp.controllers", "myapp.services
                 }
             };
         }]);
-
-        app.config(function ($httpProvider) {
+app.config(function ($httpProvider) {
             $httpProvider.interceptors.push("authInterceptor");
         });
+//Authentication Interceptor..............
 
-        //app.run(function ($rootscope, $injector) {
-        //    $rootscope.logoutUser = function () {
-        //        authService.logout(); 
-        //    }
-        //    });
 
-//})();
+        
+
+
